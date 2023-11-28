@@ -1,0 +1,43 @@
+<div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+<h1 class="heading">
+  Welcome to Plant Disease Detector<br /><code>By Team BotanicBrains</code>
+</h1>
+<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<form id="uploadForm" enctype="multipart/form-data">
+  <!-- <input type="file" name="image" accept="image/*" /> -->
+  
+
+
+<div class="file-upload">
+  <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
+
+  <div class="image-upload-wrap">
+    <input class="file-upload-input" name="image" type='file' onchange="readURL(this);" accept="image/*" />
+    <div class="drag-text">
+      <h3>Drag and drop a file or select add Image</h3>
+    </div>
+  </div>
+  <div class="file-upload-content">
+    <img class="file-upload-image" src="#" alt="your image" />
+    <div class="image-title-wrap">
+      <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+    </div>
+  </div>
+  <button id="upload" type="button" onclick="uploadFile()" class="mybtn">Upload</button>
+  <!-- <button class="btn btn-outline-success btn-lg" type="button" id="upload" onclick="uploadFile()">Upload</button> -->
+</div>
+</form>
+<br>
+<div id="quoteContainer"></div>
+<img id="loading" src="assets/loading-svg.gif" alt="loading">
+<!-- Results -->
+<div id="resultcard" class="card border-light mb-3 fade-in">
+  <div class="card-header text-center" ><h1 id="result"><b></b></h1></div>
+  <div class="card-body d-flex align-items-center" id="card-body">
+    <p class="card-text child intro-para" id="diseaseInfo"><span id="sentence" class="sentence"></span></p>
+  </div>
+</div>

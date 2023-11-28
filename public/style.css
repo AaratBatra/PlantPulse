@@ -1,0 +1,338 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@200;400&family=Montserrat:ital,wght@0,400;0,700;1,400&family=Noto+Sans:wght@500&family=Patrick+Hand&family=Roboto&family=Space+Grotesk:wght@400;500;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  scrollbar-width: thin;
+  scrollbar-color: #397524 #dfe9eb;
+}
+/* scrollbar */
+/* Firefox */
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 13px;
+  width: 13px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #dfe9eb;
+}
+
+*::-webkit-scrollbar-track:hover {
+  background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-track:active {
+  background-color: #b8c0c2;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 15px;
+  background-color: #397524;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #62a34b;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #62a34b;
+}
+
+/* scrollbar end */
+
+body {
+     
+  background: url("assets/plant.webp"), linear-gradient(207.11deg, #beffe4 12.24%, #e3f8d3 90.4%);
+  background-size: 35% 125%;
+  background-repeat: repeat-x;
+  background-position: bottom;
+  height: 100vh;
+  background-attachment: fixed;
+
+
+}
+
+
+.heading {
+  font-weight: 700;
+  font-size: 4rem;
+  text-align: center;
+  background: #13a3cf;
+  background: linear-gradient(to right, #13a3cf 0%, #56b01a 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.heading > code {
+  background: #13a3cf;
+  background: linear-gradient(to left, #13a3cf 0%, #56b01a 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.file-upload {
+  background-color: #ffffff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  width: 600px;
+  min-height: fit-content;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+button {
+    padding: 1.3em 3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.6);
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  a:hover {
+    text-decoration: none;
+    color: white;
+  }
+  button:hover {
+    background-color: #23c483;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+  
+  button:active {
+    border: none;
+    transform: translateY(-1px);
+  }
+
+.file-upload-btn {
+  width: 100%;
+  margin: 0;
+  color: #fff;
+  background: #1fb264;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #15824b;
+  transition: all 0.2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.file-upload-btn:hover {
+  background: #1aa059;
+  color: #ffffff;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.file-upload-btn:active {
+  border: 0;
+  transition: all 0.2s ease;
+}
+
+.file-upload-content {
+  display: none;
+  text-align: center;
+}
+
+.file-upload-input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-upload-wrap {
+  margin-top: 20px;
+  border: 4px dashed #1fb264;
+  position: relative;
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+  background-color: #1fb264;
+  border: 4px dashed #ffffff;
+}
+
+.image-title-wrap {
+  padding: 0 15px 15px 15px;
+  color: #222;
+}
+
+.drag-text {
+  text-align: center;
+}
+
+.drag-text h3 {
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #15824b;
+  padding: 60px 0;
+}
+
+.file-upload-image {
+  max-height: 200px;
+  max-width: 200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.remove-image {
+  width: 200px;
+  margin: 0;
+  color: #fff;
+  background: #cd4535;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #b02818;
+  transition: all 0.2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.remove-image:hover {
+  background: #c13b2a;
+  color: #ffffff;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.remove-image:active {
+  border: 0;
+  transition: all 0.2s ease;
+}
+
+#upload {
+  display: block;
+
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  /* border: none; */
+  /* border-radius: 15px; */
+  /* height: 30px; */
+  /* width: 200px; */
+  text-align: center;
+}
+
+#upload:hover {
+  background: linear-gradient(207.11deg, #4ec996 12.24%, #87d44c 90.4%);
+}
+
+#loading {
+  display: none;
+  min-height: fit-content;
+  width: 200px;
+  margin: 1px auto;
+}
+#resultcard {
+  display: block;
+}
+#result {
+  text-align: center;
+  width: 100%;
+  font-size: 1.5rem;
+  color: #cd4535 !important;
+  background: none;
+}
+
+#quoteContainer {
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.5rem;
+    font-style: italic;
+    font-family: 'Montserrat:ital';
+}
+
+.intro-para {
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+#sentence {
+  font-weight: 500;
+}
+
+.child {
+  padding-left: 20px;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  max-width: 85%;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-style: none;
+}
+.card-header {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+.card-body {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+.gravitation {
+  display: block;
+  width: 350px;
+  height: 200px;
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(50px); /* Optional: Add a slight vertical translation */
+  transition: opacity 2s ease, transform 2s ease;
+}
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (max-width: 1000px) {
+    body {
+        background-size: contain;
+        background-position: bottom right;
+        background-repeat: no-repeat;
+    }
+  .heading {
+    font-size: 2rem;
+  }
+  .file-upload {
+    width: 100%;
+  }
+  .card {
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 0;
+  }
+  .card-body {
+    flex-direction: column;
+  }
+  .gravitation {
+    width: 100%;
+  }
+  .card-body {
+    padding: 0;
+  }
+  .card-header {
+    padding: 0;
+  }
+}
