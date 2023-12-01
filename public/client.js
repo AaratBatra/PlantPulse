@@ -2,7 +2,7 @@ function uploadFile() {
   let quoteInterval;
   if (document.getElementById("resultcard").style.display == "block") {
     alert("Please refresh the page first");
-    return
+    return;
   }
   document.getElementById("loading").style.display = "block";
   const fileInput = document.querySelector('input[type="file"]');
@@ -12,7 +12,6 @@ function uploadFile() {
   if (fileInput.files.length > 0) {
     const file = fileInput.files[0];
     formData.append("image", file);
-
     // Convert image to pixels using FileReader
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -28,47 +27,75 @@ function uploadFile() {
         ctx.drawImage(image, 0, 0, 256, 256);
         //document.body.appendChild(canvas);
         // Get pixel data from the canvas
-        const imageData = ctx.getImageData(
-          0,
-          0,
-          canvas.width,
-          canvas.height
-        ).data;
-        const pixelData = [];
-        //for (let i = 0; i < imageData.length; i += 4) {
-          // Only take the first three channels (R, G, B)
-          //pixelData.push(imageData[i], imageData[i + 1], imageData[i + 2]);
-        //}
-        for (let i = 0; i < imageData.length; i += 4) {
-          // Convert from RGB to BGR
-          pixelData.push(imageData[i + 2], imageData[i + 1], imageData[i]);
-          
-        }
-        //for (let i = 0; i < pixelData.length; i += 3) {
-          // Convert from RGB to BGR
-          //pixelData[i] -= 103.939;
-          //pixelData[i+1] -= 116.779;
-          //pixelData[i+2] -= 123.68;
-          
-        //}
-        // Zero-center each color channel (assuming mean values for each channel)
-        
-        // Send pixel data to the server
-        formData.append("pixelData", pixelData.join(","));
-        fetch("assets/quotes.json").then((response) => response.json()).then((quoteData) => {
-          console.log("starting")
-          // Start displaying quotes at an interval
-          quoteInterval = setInterval(() => {
+        //new
+        // Assuming 'image' is your input image
+        const tensor = tf.browser
+          .fromPixels(canvas)
+          .resizeNearestNeighbor([256, 256])
+          .toFloat();
+
+        // Define mean ImageNet values
+        const meanImageNetRGB = {
+          red: 123.68,
+          green: 116.779,
+          blue: 103.939,
+        };
+
+        // Define indices
+        const indices = [
+          tf.tensor1d([0], "int32"),
+          tf.tensor1d([1], "int32"),
+          tf.tensor1d([2], "int32"),
+        ];
+
+        // Center the RGB values
+        const centeredRGB = {
+          red: tf
+            .gather(tensor, indices[0], 2)
+            .sub(tf.scalar(meanImageNetRGB.red))
+            .reshape([256 * 256]),
+          green: tf
+            .gather(tensor, indices[1], 2)
+            .sub(tf.scalar(meanImageNetRGB.green))
+            .reshape([256 * 256]),
+          blue: tf
+            .gather(tensor, indices[2], 2)
+            .sub(tf.scalar(meanImageNetRGB.blue))
+            .reshape([256 * 256]),
+        };
+
+        // Stack, reverse, reshape, and expand dimensions
+        const processedTensor = tf
+          .stack([centeredRGB.red, centeredRGB.green, centeredRGB.blue], 1)
+          .reshape([256, 256, 3])
+          .reverse(2)
+          .expandDims(0); //change
+
+        // Convert the processed tensor to a flattened Float32Array
+        const flattenedData = processedTensor.flatten().arraySync();
+        console.log(flattenedData);
+        // Send 'flattenedData' to the server for further processing
+        fetch("assets/quotes.json")
+          .then((response) => response.json())
+          .then((quoteData) => {
+            console.log("starting");
+            // Start displaying quotes at an interval
+            quoteInterval = setInterval(() => {
               displayRandomQuote(quoteData.quotes);
             }, 10000); // Change the interval as needed
-          }).catch((error) => console.error("Error fetching quotes:", error));
-        // Make the POST request
+          })
+          .catch((error) => console.error("Error fetching quotes:", error));
         fetch("http://localhost:3000/predict", {
           method: "POST",
-          body: formData,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ pixelData: flattenedData }),
         })
           .then((response) => response.json())
           .then((data) => {
+            // Handle the response from the server
+            console.log(data);
             clearInterval(quoteInterval);
             document.getElementById("quoteContainer").style.display = "none";
             document.getElementById("loading").style.display = "none";
@@ -76,17 +103,16 @@ function uploadFile() {
             document.getElementById("resultcard").classList.add("show");
             canvas.classList.add("gravitation");
             card_body.prepend(canvas);
-          
+
             //document.getElementById("maxResult").innerText = `Max Key: ${maxKey}, Max Value: ${maxValue}`
             document.getElementById(
               "result"
             ).innerText = `Predicted Disease: ${data.name}`;
-            console.log(data.info)
-            typeSentence(`${data.info}`, "#sentence")
+            console.log(data.info);
+            typeSentence(`${data.info}`, "#sentence");
           })
           .catch((error) => console.error("Error:", error));
-          // show quotes while loading
-
+        // new end
       };
     };
   } else {
@@ -106,17 +132,16 @@ function displayRandomQuote(quotes) {
 async function typeSentence(sentence, eleRef, delay = 100) {
   const letters = sentence.split(" ");
   let i = 0;
-  while(i < letters.length) {
+  while (i < letters.length) {
     await waitForMs(delay);
-    $(eleRef).append(" "+letters[i]);
-    i++
+    $(eleRef).append(" " + letters[i]);
+    i++;
   }
   return;
 }
 
-
 function waitForMs(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function readURL(input) {

@@ -64,8 +64,8 @@ function getDisease({ predictions }) {
             const disease_info = disease_data[buff_disease];           
             if (disease_info == undefined) {
                 return {
-                    name: "No Disease Detected",
-                    info: "The plant might be healthy!"
+                    name: disease,
+                    info: "No data available for this OR This plant might be healthy!"
                 };
             }
             return {

@@ -294,8 +294,8 @@ button {
 }
 .gravitation {
   display: block;
-  width: 350px;
-  height: 200px;
+  width: 256px;
+  height: 256px;
 }
 .fade-in {
   opacity: 0;
@@ -307,11 +307,11 @@ button {
   transform: translateY(0);
 }
 @media (max-width: 1000px) {
-    body {
-        background-size: contain;
-        background-position: bottom right;
-        background-repeat: no-repeat;
-    }
+  body {
+     background-size: contain;
+     background-position: bottom right;
+     background-repeat: no-repeat;
+  }
   .heading {
     font-size: 2rem;
   }
