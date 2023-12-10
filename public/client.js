@@ -24,6 +24,12 @@ function uploadFile() {
         canvas.width = 256;
         canvas.height = 256;
         const ctx = canvas.getContext("2d");
+        
+        //ctx.translate(256, 0); // horizontal flip
+        //ctx.scale(-1, 1); // horizontal flip
+        //const zoomFactor = 1 + Math.random() * 0.5 * 2 - 0.5; //zoom
+        //ctx.scale(-0.5, 0.5); //zoom
+        //ctx.transform(1, 0.3, 0, 1, 0, 0); // shear range // this line gives grape black rot 
         ctx.drawImage(image, 0, 0, 256, 256);
         //document.body.appendChild(canvas);
         // Get pixel data from the canvas
