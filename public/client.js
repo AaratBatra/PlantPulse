@@ -36,9 +36,9 @@ function uploadFile() {
 
         // Define mean ImageNet values
         const meanImageNetRGB = {
-          red: 123.68,
-          green: 116.779,
-          blue: 103.939,
+          red: 123.68, //128.5
+          green: 116.779, //136.3
+          blue: 103.939 //143.7
         };
 
         // Define indices

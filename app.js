@@ -39,16 +39,16 @@ app.post('/predict', async (req, res) => {
   
 
   //const pixelData = req.body.pixelData.split(',').map(Number);
-  const float32Array = new Float32Array(req.body.pixelData);
-  console.log(float32Array.length)
-  // Create a tensor from pixel data
+    // Create a tensor from pixel data
   //const tensor = tf.tensor(float32Array, [224, 224, 3]).toFloat();
   //const inputTensor = tensor.div(tf.scalar(255.0)).expandDims(0);
+  const float32Array = new Float32Array(req.body.pixelData);
+  console.log(float32Array.length)
+
   
   const tensor = tf.tensor(float32Array, [256, 256, 3]).expandDims(0)//.toFloat();
-  const normalizedTensor = tensor.div(tf.scalar(255.0));
-  //const inputTensor = tensor.slice([0, 0, 0], [224, 224, 3]); // Keep only the first 3 channels
-  // Make predictions using the loaded model
+  const normalizedTensor = tensor.div(tf.scalar(255.0)); //255.0
+
   console.log("Input Tensor Shape:", normalizedTensor.shape);
   const predictions = model.predict(normalizedTensor).dataSync();
   //console.log(typeof(predictions))
