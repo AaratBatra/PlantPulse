@@ -23,4 +23,4 @@ A Plant Disease Detector made using tensorflowjs and node js
 ## Future Steps
 
 ## Video
-<img src: "PlantPulse/plantpulsevidd.mp4">
+<img src="plantpulsevidd.mp4">
