@@ -40,6 +40,4 @@ A Plant Disease Detector made using tensorflowjs and node js
 3. Integrate tfjs-node package either in a virtual machine or local machine to smoothly load the model and inccrease the speed of processing.
 4. Create a secondary flask server to load future versions of the model in order to scale the backend better and maintain encapsulation and abstraction.
 5. Improving the accuraccy even further by testing more neural networks.
-   
-## Video
-<img src="plantpulsevidd.mp4">
+
